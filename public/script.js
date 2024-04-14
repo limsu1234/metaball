@@ -4,7 +4,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let particleArray =[];
 let adjustX = 10;
-let adjustY = 6;
+let adjustY = 10;
 ctx.lineWidth= 3;
 
 //hadle mouse
