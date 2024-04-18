@@ -1,10 +1,13 @@
 const canvas = document.getElementById('canvas1')
 const ctx = canvas.getContext('2d');
+canvas.height = window.innerHeight ;
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+
+
+
 let particleArray =[];
-let adjustX = 10;
-let adjustY = 10;
+let adjustX = 3;
+let adjustY = 6;
 ctx.lineWidth= 3;
 
 //hadle mouse
@@ -15,6 +18,7 @@ const mouse ={
     radius:250
 }
 window.addEventListener('mousemove',function(event){
+    
     mouse.x = event.x;
     mouse.y = event.y;
     
@@ -23,8 +27,8 @@ window.addEventListener('mousemove',function(event){
 
 ctx.fillStyle ='black';
 ctx.font='30px helvetica';
-ctx.fillText('GOMI',0,30);
-const textCoordinates = ctx.getImageData(0,0,100,400);
+ctx.fillText('Qomi',0,30);
+const textCoordinates = ctx.getImageData(0,0,1920,1280);
 
 class Particle {
     constructor(x,y){
@@ -42,18 +46,15 @@ class Particle {
         ctx.fillStyle ='black';
         ctx.strokeStyle ='black';
         ctx.beginPath();
-        if(this.distance <mouse.radius -5){
-            this.size=100;
-            ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-        }
-        else if(this.distance <= mouse.radius){
-            this.size=60;
-            ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-
-        }else{
-            this.size=30;
-            ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-
+        if (this.distance < mouse.radius - 5) {
+            this.size =100;
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        } else if (this.distance <= mouse.radius) {
+            this.size += (60 - this.size) * 0.05;
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        } else {
+            this.size +=(30 - this.size) * 0.05
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         }
        
         ctx.closePath();
@@ -77,11 +78,11 @@ class Particle {
         }else{
             if(this.x !==this.baseX){
                 let dx = this.x - this.baseX;
-                this.x -= dx/20;
+                this.x -= dx/10;
             } 
             if(this.y!==this.baseY){
                 let dy = this.y - this.baseY;
-                this.y -= dy/20;
+                this.y -= dy/10;
             }
         }
 
